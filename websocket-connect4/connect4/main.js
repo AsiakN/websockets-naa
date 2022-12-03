@@ -9,23 +9,24 @@ window.addEventListener("DOMContentLoaded", () => {
     sendMoves(board, websocket);
 });
 
-function sendMoves(board, websocket){
- board.addEventListener("click", ({target}) => {
-    const column = target.dataset.column;
-
-    if(column === undefined){
-        return;
-    }
-    const event = {
-        type: "play",
-        column: parseInt(column, 10),
-    };
-    websocket.send(JSON.stringify(event));
- })
-}
-
 function showMessage(message){
     window.setTimeout(() => window.alert(message), 50);
+}
+
+
+function sendMoves(board, websocket){
+    board.addEventListener("click", ({target}) => {
+       const column = target.dataset.column;
+   
+       if(column === undefined){
+           return;
+       }
+       const event = {
+           type: "play",
+           column: parseInt(column, 10),
+       };
+       websocket.send(JSON.stringify(event));
+    })
 }
 
 function recieveMoves(board, websocket){
