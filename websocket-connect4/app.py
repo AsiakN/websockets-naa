@@ -4,7 +4,8 @@ import websockets
 import json
 from connect4 import PLAYER1, PLAYER2
 from connect4 import Connect4
-import itertools
+import os
+import signal
 import secrets
 
 JOIN = {}
@@ -168,8 +169,13 @@ async def handler(websocket):
 
 
 async def main():
-    async with websockets.serve(handler, "", 8001):
-        await asyncio.Future()
+    loop = asyncio.get_running_loop()
+    stop = loop.create_future()
+    loop.add_signal_handler(signal.SIGTERM, stop, None)
+
+    port = int(os.environ.get("PORT", "8001"))
+    async with websockets.serve(handler, "",  port):
+        await stop
 
 if __name__ == "__main__":
     asyncio.run(main())
