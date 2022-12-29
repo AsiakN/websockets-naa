@@ -4,7 +4,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const board = document.querySelector(".board");
     createBoard(board);
 
-    const websocket = new WebSocket(getWebSocketServer());
+    const websocket = new WebSocket("ws://localhost:8000");
     initGame(websocket);
     recieveMoves(board, websocket);
     sendMoves(board, websocket);
