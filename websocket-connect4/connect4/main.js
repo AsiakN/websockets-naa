@@ -76,8 +76,8 @@ function initGame(websocket){
 }
 
 function getWebSocketServer(){
-    if(window.location.host == "asiakN.github.io"){
-        // return heroku url 
+    if(window.location.host == "asiakn.github.io"){
+        return "ws://localhost:8000";
     } else if(window.location.host == "localhost:8000"){
         return "ws://localhost:8000";
     }else{
