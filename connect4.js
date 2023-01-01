@@ -4,11 +4,15 @@ const PLAYER2 = "yellow";
 
 function createBoard(board) {
   // Inject stylesheet.
-  const linkElement = document.createElement("link");
-  linkElement.href = import.meta.url.replace(".js", ".css");
-  linkElement.rel = "stylesheet";
-  document.head.append(linkElement);
-  // Generate board.
+
+  
+  // const linkElement = document.createElement("link");
+  // linkElement.href = import.meta.url.replace(".js", ".css");
+  // linkElement.rel = "stylesheet";
+  // document.head.append(linkElement);
+
+
+  // // Generate board.
   for (let column = 0; column < 7; column++) {
     const columnElement = document.createElement("div");
     columnElement.className = "column";
