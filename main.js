@@ -2,9 +2,12 @@ import {createBoard, playMove} from "./connect4.js"
 
 window.addEventListener("DOMContentLoaded", () => {
     const board = document.querySelector(".board");
+    const form = document.getElementById("chat-form");
+    
     createBoard(board);
 
     const websocket = new WebSocket(getWebSocketServer());
+    sendMessage(form, websocket);
     initGame(websocket);
     recieveMoves(board, websocket);
     sendMoves(board, websocket);
@@ -52,6 +55,9 @@ function recieveMoves(board, websocket){
                 showMessage(`Player ${event.player} wins!`);
                 websocket.close(1000);
                 break; 
+            case "chat":
+                displayMessages(event.message);
+                break;
             case "error":
                 showMessage(event.message);
                 break; 
@@ -83,4 +89,37 @@ function getWebSocketServer(){
    }else{
        throw new Error(`Unsupported host: ${window.location.host}`);
    }
+}
+
+function sendMessage (form, websocket){
+    form.addEventListener("submit", (form) => {
+        const chatInput = document.getElementById('chat-input');
+        const event = {
+            type: "chat",
+            message: chatInput.value
+        };
+        websocket.send(JSON.stringify(event));
+        chatInput.value = '';
+        form.preventDefault();
+    })
+}
+
+function displayMessages(message) {
+
+    const messages = document.getElementById("chatbox")
+    const linebreak = document.createElement('br');
+
+    const content = document.createTextNode(message)
+    messages.appendChild(linebreak);
+    messages.appendChild(content)
+
+    // websocket.addEventListener('message', (event)=> {
+    //     const messages = document.getElementById("chatbox")
+    //     const linebreak = document.createElement('br');
+
+    //     const content = document.createTextNode(event.data)
+    //     messages.appendChild(linebreak);
+    //     messages.appendChild(content)
+
+    // })
 }

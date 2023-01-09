@@ -6,11 +6,32 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="/dist/output.css" rel="stylesheet">
     </head>
-    <body>
-        <div class="board"></div>
-        <div class="actions">
-            <a class="action join"  href="#">Join</a>
-            <a class="action watch" href="#">Watch</a>
+    <body>  
+        <!-- <div class="pl-2 " id="instructions">
+            <div id="menu">
+                <p class="welcome">Instructions, <b></b></p>
+            </div> 
+        </div> -->
+        <div class="flex flex-nowrap gap-16">   
+            <div class="board">
+                <div>
+                    <div class="actions mt-2">
+                        <a class="action join"  href="#">Join</a>
+                        <a class="action watch" href="#">Watch</a>
+                    </div>
+                </div>
+            </div>
+            <div id="wrapper">
+                <div id="menu">
+                    <p class="welcome">Welcome to the Chat Area, <b></b></p>
+                    <!-- <p class="logout"><a id="exit" href="#">Exit Chat</a></p> -->
+                </div>
+                <div id="chatbox"></div>
+                <form id="chat-form">
+                    <input type="text" id="chat-input" placeholder="Enter message here">
+                    <button type="submit" id="chat-button">Send</button>
+                </form> 
+            </div>
         </div>
         <script src="main.js" type="module"></script>
     </body>

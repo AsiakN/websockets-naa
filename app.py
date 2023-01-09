@@ -105,6 +105,8 @@ async def play(websocket, game, player, connected):
     """
     async for message in websocket:
         event = json.loads(message)
+        print(event)
+        
         assert(event['type'] == 'play')
         column = event['column']
 
@@ -155,15 +157,27 @@ async def replay(websocket, game):
         await websocket.send(json.dumps(event))
 
 
+async def chat(websocket, message):
+    event = {
+        "type": "chat",
+        "message": message
+    }
+
+    await websocket.send(json.dumps(event))
+
+
 async def handler(websocket):
     message = await websocket.recv()
     event = json.loads(message)
+    print(event)
     assert event['type'] == "init"
 
     if "join" in event:
         await join(websocket, event["join"])
     elif "watch" in event:
         await watch(websocket, event["watch"])
+    elif "chat" in event:
+        await chat(websocket, event["chat"])
     else:
         await start(websocket)
 
