@@ -7,7 +7,7 @@ window.addEventListener("DOMContentLoaded", () => {
     createBoard(board);
 
     const websocket = new WebSocket(getWebSocketServer());
-    sendMessage(form, websocket);
+    // sendMessage(form, websocket);
     initGame(websocket);
     recieveMoves(board, websocket);
     sendMoves(board, websocket);
@@ -112,14 +112,4 @@ function displayMessages(message) {
     const content = document.createTextNode(message)
     messages.appendChild(linebreak);
     messages.appendChild(content)
-
-    // websocket.addEventListener('message', (event)=> {
-    //     const messages = document.getElementById("chatbox")
-    //     const linebreak = document.createElement('br');
-
-    //     const content = document.createTextNode(event.data)
-    //     messages.appendChild(linebreak);
-    //     messages.appendChild(content)
-
-    // })
 }

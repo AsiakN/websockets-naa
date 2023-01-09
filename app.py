@@ -176,8 +176,6 @@ async def handler(websocket):
         await join(websocket, event["join"])
     elif "watch" in event:
         await watch(websocket, event["watch"])
-    elif "chat" in event:
-        await chat(websocket, event["chat"])
     else:
         await start(websocket)
 
